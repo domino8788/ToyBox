@@ -1,0 +1,10 @@
+{
+  "name": "learn-react-native",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "cd frontendapp && yarn android",
+    "test": "cd frontendapp && yarn test",
+    "lint": "cd frontendapp && yarn lint"
+  }
+}
