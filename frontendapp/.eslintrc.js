@@ -4,13 +4,9 @@ module.exports = {
     node: true,
     jest: true,
   },
-  extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:react-hooks/recommended',
-  ],
+  extends: ['prettier', 'eslint:recommended', 'plugin:react/recommended', 'plugin:react-hooks/recommended', 'plugin:prettier/recommended'],
   parserOptions: {
-    project: './jsconfig.js',
+    project: './jsconfig.json',
     ecmaVersion: 2021,
     sourceType: 'module',
   },
@@ -21,6 +17,7 @@ module.exports = {
     'no-empty-function': 'off',
     'react/display-name': 'off',
     'react/prop-types': 'off',
+    'prettier/prettier': ['error', { endOfLine: 'auto' }],
   },
   settings: {
     react: {
