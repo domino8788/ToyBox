@@ -1,13 +1,19 @@
 import React from 'react';
-import { SafeAreaView } from 'react-native';
+import { SafeAreaView, StyleSheet } from 'react-native';
 import { Todo } from 'screens';
 
 const App = () => {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.block}>
       <Todo />
     </SafeAreaView>
   );
 };
+const styles = StyleSheet.create({
+  block: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+});
 
 export default App;
