@@ -6,12 +6,13 @@ import Empty from './Empty';
 import AddItem from './AddItem';
 
 const Linear = (props) => {
+  const { data, onToggle } = props;
   return (
     <FlatList
       ItemSeparatorComponent={() => <View style={styles.separator} />}
       style={styles.list}
-      data={props.data}
-      renderItem={({ item }) => <Item id={item.id} text={item.text} done={item.done} />}
+      data={data}
+      renderItem={({ item }) => <Item id={item.id} text={item.text} done={item.done} onToggle={onToggle} />}
       keyExtractor={(item) => item.id.toString()}
     />
   );

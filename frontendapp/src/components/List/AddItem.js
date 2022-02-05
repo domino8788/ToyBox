@@ -3,6 +3,7 @@ import { View, StyleSheet, TextInput, Image, TouchableOpacity, TouchableNativeFe
 import image_add_white from 'assets/icons/add_white/add_white.png';
 
 function AddItem(props) {
+  const { onInsert, placeholder } = props;
   const [text, setText] = useState('');
   const button = (
     <View style={styles.buttonStyle}>
@@ -10,13 +11,16 @@ function AddItem(props) {
     </View>
   );
   const onPress = useCallback(() => {
-    setText('');
+    setText((text) => {
+      onInsert(text);
+      return '';
+    });
     Keyboard.dismiss();
   }, []);
   return (
     <View style={styles.block}>
       <TextInput
-        placeholder={props.placeholder}
+        placeholder={placeholder}
         placeholderTextColor="gray"
         style={styles.input}
         value={text}
@@ -42,6 +46,7 @@ function AddItem(props) {
 
 AddItem.defaultProps = {
   placeholder: '입력',
+  onInsert: () => {},
 };
 
 const styles = StyleSheet.create({
