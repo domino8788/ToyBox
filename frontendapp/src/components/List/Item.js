@@ -1,15 +1,46 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import React, { useCallback } from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Alert } from 'react-native';
 import icon_check_white from 'assets/icons/check_white/check_white.png';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const Item = (props) => {
-  const { id, text, done, onToggle } = props;
+  const { id, text, done, onToggle, onRemove } = props;
+  const remove = useCallback(
+    (id) => {
+      Alert.alert(
+        '삭제',
+        '정말로 삭제하시겠어요?',
+        [
+          { text: '취소', onPress: () => {}, style: 'cancel' },
+          {
+            text: '삭제',
+            onPress: () => {
+              onRemove(id);
+            },
+            style: 'destructive',
+          },
+        ],
+        {
+          cancelable: true,
+          onDismiss: () => {},
+        },
+      );
+    },
+    [onRemove],
+  );
   return (
     <View style={styles.item}>
       <TouchableOpacity onPress={() => onToggle(id)}>
         <View style={[styles.circle, done && styles.filled]}>{done && <Image source={icon_check_white} />}</View>
       </TouchableOpacity>
       <Text style={[styles.text, done && styles.lineThrough]}>{text}</Text>
+      {done ? (
+        <TouchableOpacity onPress={() => remove(id)}>
+          <Icon name="delete" size={32} color="red" />
+        </TouchableOpacity>
+      ) : (
+        <View style={styles.removePlaceholder} />
+      )}
     </View>
   );
 };
@@ -41,6 +72,10 @@ const styles = StyleSheet.create({
   lineThrough: {
     color: '#9e9e9e',
     textDecorationLine: 'line-through',
+  },
+  removePlaceholder: {
+    width: 32,
+    height: 32,
   },
 });
 

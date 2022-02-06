@@ -36,6 +36,15 @@ const Todo = () => {
     );
   }, []);
 
+  const onRemove = useCallback((id) => {
+    setTodos(
+      produce((todos) => {
+        const targetTodoIndex = todos.findIndex((todo) => todo.id === id);
+        if (targetTodoIndex !== -1) todos.splice(targetTodoIndex, 1);
+      }),
+    );
+  }, []);
+
   return (
     <>
       <StatusBar backgroundColor={defaultColor} barStyle="light-content" />
@@ -43,7 +52,7 @@ const Todo = () => {
       {todos.length === 0 ? (
         <List.Empty image={image_young_and_happy} text="야호! 할일이 없습니다." />
       ) : (
-        <List.Linear data={todos} onToggle={onToggle} />
+        <List.Linear data={todos} onToggle={onToggle} onRemove={onRemove} />
       )}
       <List.AddItem placeholder="할일을 입력하세요." onInsert={onInsert} />
     </>
