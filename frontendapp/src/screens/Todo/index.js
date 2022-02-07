@@ -1,8 +1,10 @@
 import React, { useState, useCallback } from 'react';
-import { StyleSheet, StatusBar } from 'react-native';
+import { View, StatusBar } from 'react-native';
 import { Header, List } from 'components';
 import image_young_and_happy from 'assets/images/young_and_happy.png';
 import produce from 'immer';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useStyles } from 'hooks';
 
 const defaultColor = '#26a69a';
 
@@ -12,6 +14,8 @@ const Todo = () => {
     { id: 2, text: '리액트 네이티브 기초 공부', done: false },
     { id: 3, text: '투두리스트 만들어보기', done: false },
   ]);
+  const styles = useStyles(makeStyles({ backgroundColor: defaultColor }), []);
+  const { top } = useSafeAreaInsets();
 
   const onInsert = useCallback((text) => {
     setTodos(
@@ -47,6 +51,7 @@ const Todo = () => {
 
   return (
     <>
+      <View style={[styles.statusBarPlaceholder, { height: top }]} />
       <StatusBar backgroundColor={defaultColor} barStyle="light-content" />
       <Header.DateHeader backgroundColor={defaultColor} />
       {todos.length === 0 ? (
@@ -59,6 +64,10 @@ const Todo = () => {
   );
 };
 
-const styles = StyleSheet.create({});
+const makeStyles = (props) => ({
+  statusBarPlaceholder: {
+    backgroundColor: props.backgroundColor,
+  },
+});
 
 export default Todo;

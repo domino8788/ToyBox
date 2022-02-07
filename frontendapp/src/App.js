@@ -1,12 +1,15 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import { Todo } from 'screens';
 
 const App = () => {
   return (
-    <SafeAreaView style={styles.block}>
-      <Todo />
-    </SafeAreaView>
+    <SafeAreaProvider>
+      <SafeAreaView style={styles.block} edges={['bottom']}>
+        <Todo />
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 };
 const styles = StyleSheet.create({
