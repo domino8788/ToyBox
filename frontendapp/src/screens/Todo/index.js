@@ -1,10 +1,11 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { View, StatusBar } from 'react-native';
 import { Header, List } from 'components';
 import image_young_and_happy from 'assets/images/young_and_happy.png';
 import produce from 'immer';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useStyles } from 'hooks';
+import todosStorage from 'storages/todosStorage';
 
 const defaultColor = '#26a69a';
 
@@ -14,6 +15,13 @@ const Todo = () => {
     { id: 2, text: '리액트 네이티브 기초 공부', done: false },
     { id: 3, text: '투두리스트 만들어보기', done: false },
   ]);
+  useEffect(() => {
+    todosStorage.get().then(setTodos).catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    todosStorage.set(todos).catch(console.error);
+  }, [todos]);
   const styles = useStyles(makeStyles({ backgroundColor: defaultColor }), []);
   const { top } = useSafeAreaInsets();
 
