@@ -3,7 +3,7 @@ import { StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Todo } from 'screens';
+import { Home, Todo } from 'screens';
 
 const Stack = createNativeStackNavigator();
 
@@ -13,8 +13,9 @@ const App = () => {
       <SafeAreaProvider>
         <SafeAreaView style={styles.block} edges={['bottom']}>
           <KeyboardAvoidingView behavior={Platform.select({ ios: 'padding' })} style={styles.avoid}>
-            <Stack.Navigator initialRouteName="Todo">
-              <Stack.Screen name="Todo" component={Todo} options={{ headerShown: false }} />
+            <Stack.Navigator initialRouteName="Home">
+              <Stack.Screen name="Home" component={Home} />
+              <Stack.Screen name="Todo" component={Todo} />
             </Stack.Navigator>
           </KeyboardAvoidingView>
         </SafeAreaView>
