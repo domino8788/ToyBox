@@ -14,7 +14,7 @@ const App = () => {
         <SafeAreaView style={styles.block} edges={['bottom']}>
           <KeyboardAvoidingView behavior={Platform.select({ ios: 'padding' })} style={styles.avoid}>
             <Stack.Navigator initialRouteName="Todo">
-              <Stack.Screen name="Todo" component={Todo} />
+              <Stack.Screen name="Todo" component={Todo} options={{ headerShown: false }} />
             </Stack.Navigator>
           </KeyboardAvoidingView>
         </SafeAreaView>
