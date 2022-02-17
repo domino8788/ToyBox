@@ -9,20 +9,30 @@ import { Home, Todo } from 'screens';
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
+const AppContainer = (props) => (
+  <SafeAreaProvider>
+    <SafeAreaView style={styles.block} edges={['bottom']}>
+      <KeyboardAvoidingView behavior={Platform.select({ ios: 'padding' })} style={styles.avoid}>
+        {props.children}
+      </KeyboardAvoidingView>
+    </SafeAreaView>
+  </SafeAreaProvider>
+);
+
+const DrawerContainer = () => (
+  <NavigationContainer>
+    <Drawer.Navigator initialRouteName="Home" drawerPosition="left" backBehavior="history">
+      <Drawer.Screen name="Home" component={Home} />
+      <Drawer.Screen name="Todo" component={Todo} />
+    </Drawer.Navigator>
+  </NavigationContainer>
+);
+
 const App = () => {
   return (
-    <SafeAreaProvider>
-      <SafeAreaView style={styles.block} edges={['bottom']}>
-        <KeyboardAvoidingView behavior={Platform.select({ ios: 'padding' })} style={styles.avoid}>
-          <NavigationContainer>
-            <Drawer.Navigator initialRouteName="Home" drawerPosition="left" backBehavior="history">
-              <Drawer.Screen name="Home" component={Home} />
-              <Drawer.Screen name="Todo" component={Todo} />
-            </Drawer.Navigator>
-          </NavigationContainer>
-        </KeyboardAvoidingView>
-      </SafeAreaView>
-    </SafeAreaProvider>
+    <AppContainer>
+      <DrawerContainer />
+    </AppContainer>
   );
 };
 const styles = StyleSheet.create({
