@@ -9,7 +9,7 @@ import todosStorage from 'storages/todosStorage';
 
 const defaultColor = '#26a69a';
 
-const Todo = () => {
+const TodoScreen = () => {
   const [todos, setTodos] = useState([
     { id: 1, text: '작업환경 설정', done: true },
     { id: 2, text: '리액트 네이티브 기초 공부', done: false },
@@ -78,4 +78,4 @@ const makeStyles = (props) => ({
   },
 });
 
-export default Todo;
+export default TodoScreen;
