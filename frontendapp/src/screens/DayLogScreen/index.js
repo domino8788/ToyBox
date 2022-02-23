@@ -2,16 +2,35 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { WriteScreen, FeedsScreen, CalendarScreen, SearchScreen } from 'screens';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 const DayLogTab = () => {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Feeds" component={FeedsScreen} />
-      <Tab.Screen name="Calendar" component={CalendarScreen} />
-      <Tab.Screen name="Search" component={SearchScreen} />
+    <Tab.Navigator screenOptions={{ showLabel: false, activeTintColor: '#009688' }}>
+      <Tab.Screen
+        name="Feeds"
+        component={FeedsScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => <Icon name="view-stream" size={size} color={color} />,
+        }}
+      />
+      <Tab.Screen
+        name="Calendar"
+        component={CalendarScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => <Icon name="event" size={size} color={color} />,
+        }}
+      />
+      <Tab.Screen
+        name="Search"
+        component={SearchScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => <Icon name="search" size={size} color={color} />,
+        }}
+      />
     </Tab.Navigator>
   );
 };
