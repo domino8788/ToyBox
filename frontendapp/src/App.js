@@ -4,19 +4,22 @@ import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { HomeScreen, TodoScreen, DayLogScreen } from 'screens';
+import { ContextProvider } from 'stores/Context';
 
 LogBox.ignoreLogs(["[react-native-gesture-handler] Seems like you're using an old API with gesture components, check out new Gestures system!"]);
 
 const Drawer = createDrawerNavigator();
 
 const AppContainer = (props) => (
-  <SafeAreaProvider>
-    <SafeAreaView style={styles.block} edges={['bottom']}>
-      <KeyboardAvoidingView behavior={Platform.select({ ios: 'padding' })} style={styles.avoid}>
-        {props.children}
-      </KeyboardAvoidingView>
-    </SafeAreaView>
-  </SafeAreaProvider>
+  <ContextProvider>
+    <SafeAreaProvider>
+      <SafeAreaView style={styles.block} edges={['bottom']}>
+        <KeyboardAvoidingView behavior={Platform.select({ ios: 'padding' })} style={styles.avoid}>
+          {props.children}
+        </KeyboardAvoidingView>
+      </SafeAreaView>
+    </SafeAreaProvider>
+  </ContextProvider>
 );
 
 const DrawerContainer = () => (
