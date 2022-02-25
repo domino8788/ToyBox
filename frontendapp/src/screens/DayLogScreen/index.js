@@ -37,9 +37,9 @@ const DayLogTab = () => {
 
 const DayLogScreen = () => {
   return (
-    <Stack.Navigator initialRouteName="DayLogTab" options={{ headerShown: false }}>
+    <Stack.Navigator initialRouteName="DayLogTab">
       <Stack.Screen name="DayLogTab" component={DayLogTab} options={{ headerShown: false }} />
-      <Stack.Screen name="Write" component={WriteScreen} />
+      <Stack.Screen name="Write" component={WriteScreen} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 };
