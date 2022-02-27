@@ -1,5 +1,3 @@
-import Header from 'components/Header';
-import List from 'components/List';
-import FloatingButton from 'components/FloatingButton';
-
-export { Header, List, FloatingButton };
+export { default as Header } from './Header';
+export { default as List } from './List';
+export { default as Button } from './Button';

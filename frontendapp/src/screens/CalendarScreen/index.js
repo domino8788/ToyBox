@@ -1,14 +1,14 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { FloatingButton } from 'components';
+import { Button } from 'components';
 
-function CalendarScreen() {
+const CalendarScreen = () => {
   return (
     <View style={styles.block}>
-      <FloatingButton />
+      <Button.Floating />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   block: { flex: 1 },

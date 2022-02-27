@@ -1,8 +1,13 @@
 import React from 'react';
 import { Platform, Pressable, StyleSheet, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-function FloatingButton() {
+const Floating = () => {
+  const navigation = useNavigation();
+  const onPress = () => {
+    navigation.navigate('Write');
+  };
   return (
     <View style={styles.wrapper}>
       <Pressable
@@ -15,12 +20,13 @@ function FloatingButton() {
           }),
         ]}
         android_ripple={{ color: 'white' }}
+        onPress={onPress}
       >
         <Icon name="add" size={24} style={styles.icon} />
       </Pressable>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -54,4 +60,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FloatingButton;
+export default Floating;
