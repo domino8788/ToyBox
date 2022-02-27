@@ -61,7 +61,7 @@ const TodoScreen = () => {
     <>
       <View style={[styles.statusBarPlaceholder, { height: top }]} />
       <StatusBar backgroundColor={defaultColor} barStyle="light-content" />
-      <Header.DateHeader backgroundColor={defaultColor} />
+      <Header.FormattedDate backgroundColor={defaultColor} />
       {todos.length === 0 ? (
         <List.Empty image={image_young_and_happy} text="야호! 할일이 없습니다." />
       ) : (

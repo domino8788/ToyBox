@@ -1,4 +1,4 @@
-import DateHeader from './DateHeader';
-import WriteHeader from './WriteHeader';
+import FormattedDate from './FormattedDate';
+import Write from './Write';
 
-export default { DateHeader, WriteHeader };
+export default { FormattedDate, Write };
