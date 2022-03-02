@@ -3,7 +3,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import Button from 'components/Button';
 
-const Write = () => {
+const Write = ({ onSave }) => {
   const navigation = useNavigation();
   const onGoBack = () => {
     navigation.pop();
@@ -15,7 +15,7 @@ const Write = () => {
       </View>
       <View style={styles.buttons}>
         <Button.Transparent name="delete-forever" color="#ef5350" hasMarginRight type="circle" />
-        <Button.Transparent name="check" color="#009688" type="circle" />
+        <Button.Transparent name="check" color="#009688" type="circle" onPress={onSave} />
       </View>
     </View>
   );
