@@ -63,11 +63,11 @@ const TodoScreen = () => {
       <StatusBar backgroundColor={defaultColor} barStyle="light-content" />
       <Header.FormattedDate backgroundColor={defaultColor} />
       {todos.length === 0 ? (
-        <List.Empty image={image_young_and_happy} text="야호! 할일이 없습니다." />
+        <List.Item.Empty image={image_young_and_happy} text="야호! 할일이 없습니다." />
       ) : (
-        <List.Linear data={todos} onToggle={onToggle} onRemove={onRemove} />
+        <List.Linear data={todos} onToggle={onToggle} onRemove={onRemove} Item={List.Item.Todo} />
       )}
-      <List.AddItem placeholder="할일을 입력하세요." onInsert={onInsert} />
+      <List.Item.Add placeholder="할일을 입력하세요." onInsert={onInsert} />
     </>
   );
 };

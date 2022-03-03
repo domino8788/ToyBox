@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { View, StyleSheet, TextInput, Image, TouchableOpacity, TouchableNativeFeedback, Platform, Keyboard } from 'react-native';
 import image_add_white from 'assets/icons/add_white/add_white.png';
 
-const AddItem = (props) => {
+const Add = (props) => {
   const { onInsert, placeholder } = props;
   const [text, setText] = useState('');
   const button = (
@@ -44,7 +44,7 @@ const AddItem = (props) => {
   );
 };
 
-AddItem.defaultProps = {
+Add.defaultProps = {
   placeholder: '입력',
   onInsert: () => {},
 };
@@ -80,4 +80,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddItem;
+export default Add;

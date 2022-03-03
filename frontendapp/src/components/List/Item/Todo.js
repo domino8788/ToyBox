@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, Alert } from 'react-na
 import icon_check_white from 'assets/icons/check_white/check_white.png';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const Item = (props) => {
+const Todo = (props) => {
   const { id, text, done, onToggle, onRemove } = props;
   const remove = useCallback(
     (id) => {
@@ -79,4 +79,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Item;
+export default Todo;
