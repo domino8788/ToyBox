@@ -4,7 +4,7 @@ import produce from 'immer';
 
 const Context = createContext();
 
-const addLog = ({ title, body, date }) =>
+const insertLog = ({ title, body, date }) =>
   produce((draft) => {
     if (!draft.logs) {
       draft.logs = [];
@@ -17,10 +17,41 @@ const addLog = ({ title, body, date }) =>
     });
   });
 
+const updateLog = ({ id, title, body, date }) =>
+  produce((draft) => {
+    if (!draft.logs) {
+      draft.logs = [];
+    } else {
+      draft.logs[draft.logs.findIndex((log) => log.id === id)] = {
+        id,
+        title,
+        body,
+        date,
+      };
+    }
+  });
+
+const deleteLog = ({ id }) =>
+  produce((draft) => {
+    if (!draft.logs) {
+      draft.logs = [];
+    }
+    draft.logs.splice(
+      draft.logs.findIndex((log) => log.id === id),
+      1,
+    );
+  });
+
 function reducer(state, action) {
   switch (action.type) {
-    case 'ADD_LOG': {
-      return addLog(action.payload)(state);
+    case 'INSERT_LOG': {
+      return insertLog(action.payload)(state);
+    }
+    case 'UPDATE_LOG': {
+      return updateLog(action.payload)(state);
+    }
+    case 'DELETE_LOG': {
+      return deleteLog(action.payload)(state);
     }
     default:
       return state;

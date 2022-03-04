@@ -12,7 +12,7 @@ const WriteScreen = () => {
   const navigation = useNavigation();
   const onSave = useCallback(() => {
     dispatch({
-      type: 'ADD_LOG',
+      type: 'INSERT_LOG',
       payload: {
         title,
         body,
