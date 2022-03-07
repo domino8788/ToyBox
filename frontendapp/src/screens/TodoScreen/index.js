@@ -65,7 +65,7 @@ const TodoScreen = () => {
       {todos.length === 0 ? (
         <List.Item.Empty image={image_young_and_happy} text="야호! 할일이 없습니다." />
       ) : (
-        <List.Linear data={todos} onToggle={onToggle} onRemove={onRemove} Item={List.Item.Todo} />
+        <List.Linear data={todos} onToggle={onToggle} onRemove={onRemove} item={List.Item.Todo} />
       )}
       <List.Item.Add placeholder="할일을 입력하세요." onInsert={onInsert} />
     </>

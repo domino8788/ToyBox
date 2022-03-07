@@ -2,7 +2,7 @@ import React from 'react';
 import { FlatList, View, StyleSheet } from 'react-native';
 
 const Linear = (props) => {
-  const { data, onToggle, onRemove, Item } = props;
+  const { data, onToggle, onRemove, item: Item } = props;
   return (
     <FlatList
       ItemSeparatorComponent={() => <View style={styles.separator} />}
