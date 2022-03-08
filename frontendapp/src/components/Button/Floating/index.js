@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { Platform, Pressable, StyleSheet, View, Animated } from 'react-native';
+import { Platform, Pressable, StyleSheet, Animated } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
