@@ -2,7 +2,19 @@ import React from 'react';
 import { FlatList, View, StyleSheet } from 'react-native';
 
 const Linear = (props) => {
-  const { data, onToggle, onRemove, item: Item } = props;
+  const { data, onToggle, onRemove, item: Item, onScrolledToBottom } = props;
+  const onScroll = (e) => {
+    if (onScrolledToBottom) {
+      const { contentSize, layoutMeasurement, contentOffset } = e.nativeEvent;
+      const distanceFromBottom = contentSize.height - layoutMeasurement.height - contentOffset.y;
+
+      if (distanceFromBottom < 72) {
+        onScrolledToBottom(true);
+      } else {
+        onScrolledToBottom(false);
+      }
+    }
+  };
   return (
     <FlatList
       ItemSeparatorComponent={() => <View style={styles.separator} />}
@@ -10,6 +22,7 @@ const Linear = (props) => {
       data={data}
       renderItem={({ item }) => <Item {...item} onToggle={onToggle} onRemove={onRemove} />}
       keyExtractor={(item) => item.id.toString()}
+      onScroll={onScroll}
     />
   );
 };
