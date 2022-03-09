@@ -1,65 +1,67 @@
-import React, { createContext, useReducer } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import React, { createContext, useReducer, useEffect } from 'react';
 import produce from 'immer';
+import storage from 'storages';
+import { insertLog, updateLog, deleteLog } from './Log';
+import { insertTodo, toggleTodo, deleteTodo } from './Todo';
 
 const Context = createContext();
-
-const insertLog = ({ title, body, date }) =>
+const initState = { logs: [], todos: [] };
+const init = ({ data }) =>
   produce((draft) => {
-    if (!draft.logs) {
-      draft.logs = [];
-    }
-    draft.logs.push({
-      id: uuidv4(),
-      title,
-      body,
-      date,
-    });
+    Object.entries(initState).forEach(([key, initValue]) => (draft[key] = data[key] || initValue));
   });
 
-const updateLog = ({ id, title, body, date }) =>
-  produce((draft) => {
-    if (!draft.logs) {
-      draft.logs = [];
-    } else {
-      draft.logs[draft.logs.findIndex((log) => log.id === id)] = {
-        id,
-        title,
-        body,
-        date,
-      };
-    }
-  });
+const INIT = 'INIT';
+export const INSERT_LOG = 'INSERT_LOG';
+export const UPDATE_LOG = 'UPDATE_LOG';
+export const DELETE_LOG = 'DELETE_LOG';
+export const INSERT_TODO = 'INSERT_TODO';
+export const TOGGLE_TODO = 'TOGGLE_TODO';
+export const DELETE_TODO = 'DELETE_TODO';
 
-const deleteLog = ({ id }) =>
-  produce((draft) => {
-    if (!draft.logs) {
-      draft.logs = [];
-    }
-    draft.logs.splice(
-      draft.logs.findIndex((log) => log.id === id),
-      1,
-    );
-  });
+const getAction = {
+  INIT: init,
+  INSERT_LOG: insertLog,
+  UPDATE_LOG: updateLog,
+  DELETE_LOG: deleteLog,
+  INSERT_TODO: insertTodo,
+  TOGGLE_TODO: toggleTodo,
+  DELETE_TODO: deleteTodo,
+};
+const makeAction = (payload, state) => (action) => action(payload)(state);
 
 function reducer(state, action) {
+  const handleAction = makeAction(action.payload, state);
+
   switch (action.type) {
-    case 'INSERT_LOG': {
-      return insertLog(action.payload)(state);
+    case INIT:
+    case INSERT_TODO:
+    case TOGGLE_TODO:
+    case DELETE_TODO:
+    case INSERT_LOG:
+    case UPDATE_LOG:
+    case DELETE_LOG: {
+      return handleAction(getAction[action.type]);
     }
-    case 'UPDATE_LOG': {
-      return updateLog(action.payload)(state);
-    }
-    case 'DELETE_LOG': {
-      return deleteLog(action.payload)(state);
-    }
-    default:
+    default: {
       return state;
+    }
   }
 }
 
 export const ContextProvider = (props) => {
-  const [store, dispatch] = useReducer(reducer, {});
+  const [store, _dispatch] = useReducer(reducer, initState);
+  const dispatch = (type, payload) => _dispatch({ type, payload });
+  useEffect(() => {
+    storage
+      .get()
+      .then((data) => dispatch(INIT, { data }))
+      .catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    storage.set(store).catch(console.error);
+  }, [store]);
   return <Context.Provider value={[store, dispatch]}>{props.children}</Context.Provider>;
 };
 

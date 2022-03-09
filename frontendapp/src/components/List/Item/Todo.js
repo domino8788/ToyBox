@@ -4,7 +4,7 @@ import icon_check_white from 'assets/icons/check_white/check_white.png';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const Todo = (props) => {
-  const { id, text, done, onToggle, onRemove } = props;
+  const { id, text, done, onToggle, onDelete } = props;
   const remove = useCallback(
     (id) => {
       Alert.alert(
@@ -15,7 +15,7 @@ const Todo = (props) => {
           {
             text: '삭제',
             onPress: () => {
-              onRemove(id);
+              onDelete(id);
             },
             style: 'destructive',
           },
@@ -26,7 +26,7 @@ const Todo = (props) => {
         },
       );
     },
-    [onRemove],
+    [onDelete],
   );
   return (
     <View style={styles.item}>
