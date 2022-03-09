@@ -3,7 +3,7 @@ import { StyleSheet, Platform, KeyboardAvoidingView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { Input, Header } from 'components';
-import Context from 'stores/Context';
+import Context, { INSERT_LOG } from 'stores/Context';
 
 const WriteScreen = () => {
   const [title, setTitle] = useState('');
@@ -11,13 +11,10 @@ const WriteScreen = () => {
   const [, dispatch] = useContext(Context);
   const navigation = useNavigation();
   const onSave = useCallback(() => {
-    dispatch({
-      type: 'INSERT_LOG',
-      payload: {
-        title,
-        body,
-        date: new Date().toISOString(),
-      },
+    dispatch(INSERT_LOG, {
+      title,
+      body,
+      date: new Date().toISOString(),
     });
     navigation.pop();
   }, [title, body, dispatch, navigation]);
