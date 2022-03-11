@@ -3,12 +3,13 @@ import { Platform, Pressable, StyleSheet, Text } from 'react-native';
 import { formatDate, truncate } from 'helpers';
 
 const Feed = (props) => {
-  const { title, body, date } = props; // 사용하기 편하게 객체 구조 분해 할당
+  const { title, body, date, onPress } = props;
 
   return (
     <Pressable
       style={({ pressed }) => [styles.block, Platform.OS === 'ios' && pressed && { backgroundColor: '#efefef' }]}
       android_ripple={{ color: '#ededed' }}
+      onPress={onPress}
     >
       <Text style={styles.date}>{formatDate(date)}</Text>
       <Text style={styles.title}>{title}</Text>
