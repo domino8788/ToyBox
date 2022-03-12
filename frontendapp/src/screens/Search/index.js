@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button } from 'components';
 
-const CalendarScreen = () => {
+const Search = () => {
   return (
     <View style={styles.block}>
       <Button.Floating />
@@ -14,4 +14,4 @@ const styles = StyleSheet.create({
   block: { flex: 1 },
 });
 
-export default CalendarScreen;
+export default Search;

@@ -1,9 +1,9 @@
-import HomeScreen from 'screens/HomeScreen';
-import TodoScreen from 'screens/TodoScreen';
-import CalendarScreen from 'screens/CalendarScreen';
-import FeedsScreen from 'screens/FeedsScreen';
-import SearchScreen from 'screens/SearchScreen';
-import WriteScreen from 'screens/WriteScreen';
-import DayLogScreen from 'screens/DayLogScreen';
+import Home from './Home';
+import Todo from './Todo';
+import Calendar from './Calendar';
+import Feed from './Feed';
+import Search from './Search';
+import Write from './Write';
+import DayLog from './DayLog';
 
-export { HomeScreen, TodoScreen, CalendarScreen, FeedsScreen, SearchScreen, WriteScreen, DayLogScreen };
+export default { Home, Todo, Calendar, Feed, Search, Write, DayLog };

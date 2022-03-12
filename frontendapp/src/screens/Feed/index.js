@@ -4,7 +4,7 @@ import { Button, List } from 'components';
 import Context from 'stores/Context';
 import { useNavigation } from '@react-navigation/native';
 
-const FeedsScreen = () => {
+const Feed = () => {
   const [store] = useContext(Context);
   const [hidden, setHidden] = useState(false);
   const navigation = useNavigation();
@@ -29,4 +29,4 @@ const styles = StyleSheet.create({
   block: { flex: 1 },
 });
 
-export default FeedsScreen;
+export default Feed;

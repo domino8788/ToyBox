@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Input, Header } from 'components';
 import Context, { INSERT_LOG, UPDATE_LOG, DELETE_LOG } from 'stores/Context';
 
-const WriteScreen = ({ route }) => {
+const Write = ({ route }) => {
   const log = route.params?.log;
   const [title, setTitle] = useState(log?.title ?? '');
   const [body, setBody] = useState(log?.body ?? '');
@@ -78,4 +78,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default WriteScreen;
+export default Write;
