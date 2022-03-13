@@ -1,7 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Screen from 'screens';
+import Template from 'templates';
 import { Header } from 'components';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -13,21 +13,21 @@ const DayLogTab = () => {
     <Tab.Navigator screenOptions={{ showLabel: false, activeTintColor: '#009688' }}>
       <Tab.Screen
         name="Feeds"
-        component={Screen.Feed}
+        component={Template.Feed}
         options={{
           tabBarIcon: ({ color, size }) => <Icon name="view-stream" size={size} color={color} />,
         }}
       />
       <Tab.Screen
         name="Calendar"
-        component={Screen.Calendar}
+        component={Template.Calendar}
         options={{
           tabBarIcon: ({ color, size }) => <Icon name="event" size={size} color={color} />,
         }}
       />
       <Tab.Screen
         name="Search"
-        component={Screen.Search}
+        component={Template.Search}
         options={{
           title: '검색',
           headerTitle: () => <Header.Search />,
@@ -42,7 +42,7 @@ const DayLog = () => {
   return (
     <Stack.Navigator initialRouteName="DayLogTab">
       <Stack.Screen name="DayLogTab" component={DayLogTab} options={{ headerShown: false }} />
-      <Stack.Screen name="Write" component={Screen.Write} options={{ headerShown: false }} />
+      <Stack.Screen name="Write" component={Template.Write} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 };

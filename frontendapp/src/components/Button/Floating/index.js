@@ -1,13 +1,8 @@
 import React, { useRef, useEffect } from 'react';
 import { Platform, Pressable, StyleSheet, Animated } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const Floating = ({ hidden }) => {
-  const navigation = useNavigation();
-  const onPress = () => {
-    navigation.navigate('Write');
-  };
+const Floating = ({ hidden, onPress }) => {
   const animation = useRef(new Animated.Value(0)).current;
   useEffect(() => {
     Animated.timing(animation, {
@@ -52,6 +47,11 @@ const Floating = ({ hidden }) => {
       </Pressable>
     </Animated.View>
   );
+};
+
+Floating.defaultProps = {
+  hidden: false,
+  onPress: () => {},
 };
 
 const styles = StyleSheet.create({

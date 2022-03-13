@@ -14,13 +14,13 @@ const Feed = () => {
     }
   };
   const onPress = (log) => {
-    navigation.navigate('Write', { log });
+    navigation.navigate('Write', { log: log });
   };
 
   return (
     <View style={styles.block}>
       <List.Linear data={store.logs} item={List.Item.Feed} onScrolledToBottom={onScrolledToBottom} onPress={onPress} />
-      <Button.Floating hidden={hidden} />
+      <Button.Floating hidden={hidden} onPress={onPress} />
     </View>
   );
 };
