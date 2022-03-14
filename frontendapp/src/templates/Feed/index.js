@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useCallback, useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, List } from 'components';
 import Context from 'stores/Context';
@@ -13,14 +13,21 @@ const Feed = () => {
       setHidden(isBottom);
     }
   };
-  const onPress = (log) => {
-    navigation.navigate('Write', { log: log });
-  };
+  const onItemPress = useCallback(
+    (log) => {
+      navigation.navigate('Write', { log });
+    },
+    [navigation],
+  );
+
+  const onFloatingButtonPress = useCallback(() => {
+    navigation.navigate('Write');
+  }, [navigation]);
 
   return (
     <View style={styles.block}>
-      <List.Linear data={store.logs} item={List.Item.Feed} onScrolledToBottom={onScrolledToBottom} onPress={onPress} />
-      <Button.Floating hidden={hidden} onPress={onPress} />
+      <List.Linear data={store.logs} item={List.Item.Feed} onScrolledToBottom={onScrolledToBottom} onPress={onItemPress} />
+      <Button.Floating hidden={hidden} onPress={onFloatingButtonPress} />
     </View>
   );
 };
