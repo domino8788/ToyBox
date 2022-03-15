@@ -30,7 +30,7 @@ const DayLogTab = () => {
         component={Template.Search}
         options={{
           title: '검색',
-          headerTitle: () => <Header.Search />,
+          headerTitle: () => <Header.Search placeholder="검색어를 입력하세요" placeholderTextColor="darkgray" />,
           tabBarIcon: ({ color, size }) => <Icon name="search" size={size} color={color} />,
         }}
       />
