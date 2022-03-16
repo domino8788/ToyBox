@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useContext, useCallback, useMemo } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Button } from 'components';
+import { List } from 'components';
+import Context from 'stores/Context';
 
-const Search = () => {
+const Search = ({ navigation }) => {
+  const [{ keyword, logs }] = useContext(Context);
+  const filtered = useMemo(
+    () => (keyword === '' ? [] : logs.filter((log) => [log.title, log.body].some((text) => text.includes(keyword)))),
+    [keyword, logs],
+  );
+  const onItemPress = useCallback(
+    (log) => {
+      navigation.navigate('Write', { log });
+    },
+    [navigation],
+  );
   return (
     <View style={styles.block}>
-      <Button.Floating />
+      <List.Linear data={filtered} item={List.Item.Feed} onPress={onItemPress} />
     </View>
   );
 };

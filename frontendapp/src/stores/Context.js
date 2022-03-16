@@ -5,10 +5,15 @@ import { insertLog, updateLog, deleteLog } from './Log';
 import { insertTodo, toggleTodo, deleteTodo } from './Todo';
 
 const Context = createContext();
-const initState = { logs: [], todos: [] };
+const initState = { logs: [], todos: [], keyword: '' };
 const init = ({ data }) =>
   produce((draft) => {
     Object.entries(initState).forEach(([key, initValue]) => (draft[key] = data[key] || initValue));
+  });
+
+const searchKeyword = ({ keyword }) =>
+  produce((draft) => {
+    draft.keyword = keyword;
   });
 
 const INIT = 'INIT';
@@ -18,6 +23,7 @@ export const DELETE_LOG = 'DELETE_LOG';
 export const INSERT_TODO = 'INSERT_TODO';
 export const TOGGLE_TODO = 'TOGGLE_TODO';
 export const DELETE_TODO = 'DELETE_TODO';
+export const SEARCH_KEYWORD = 'SEARCH_KEYWORD';
 
 const getAction = {
   INIT: init,
@@ -27,6 +33,7 @@ const getAction = {
   INSERT_TODO: insertTodo,
   TOGGLE_TODO: toggleTodo,
   DELETE_TODO: deleteTodo,
+  SEARCH_KEYWORD: searchKeyword,
 };
 const makeAction = (payload, state) => (action) => action(payload)(state);
 
@@ -40,7 +47,8 @@ function reducer(state, action) {
     case DELETE_TODO:
     case INSERT_LOG:
     case UPDATE_LOG:
-    case DELETE_LOG: {
+    case DELETE_LOG:
+    case SEARCH_KEYWORD: {
       return handleAction(getAction[action.type]);
     }
     default: {
