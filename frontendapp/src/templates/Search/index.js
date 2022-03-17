@@ -15,6 +15,13 @@ const Search = ({ navigation }) => {
     },
     [navigation],
   );
+  if (keyword === '') {
+    return <List.Item.Empty size="small" text="검색어를 입력하세요." />;
+  }
+  if (filtered.length === 0) {
+    return <List.Item.Empty size="small" text="검색 결과가 없습니다." />;
+  }
+
   return (
     <View style={styles.block}>
       <List.Linear data={filtered} item={List.Item.Feed} onPress={onItemPress} />

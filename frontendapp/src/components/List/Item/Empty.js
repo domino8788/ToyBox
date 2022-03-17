@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 
-const Empty = (props) => {
+const Empty = ({ image, text, size }) => {
   return (
     <View style={styles.block}>
-      {props.image && <Image source={props.image} style={styles.image} />}
-      <Text style={styles.description}>{props.text}</Text>
+      {image && <Image source={image} style={styles.image} />}
+      <Text style={[styles.description, sizeToStyle[size]]}>{text}</Text>
     </View>
   );
 };
@@ -13,6 +13,7 @@ const Empty = (props) => {
 Empty.defaultProps = {
   text: 'empty',
   image: null,
+  size: 'medium',
 };
 
 const styles = StyleSheet.create({
@@ -27,9 +28,23 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   description: {
-    fontSize: 24,
     color: '#9e9e9e',
   },
+  small: {
+    fontSize: 16,
+  },
+  medium: {
+    fontSize: 24,
+  },
+  large: {
+    fontSize: 34,
+  },
 });
+
+const sizeToStyle = {
+  small: styles.small,
+  medium: styles.medium,
+  large: styles.large,
+};
 
 export default Empty;
