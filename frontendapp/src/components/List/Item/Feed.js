@@ -11,7 +11,7 @@ const Feed = (props) => {
       android_ripple={{ color: '#ededed' }}
       onPress={onPress}
     >
-      <Text style={styles.date}>{formatDate(date)}</Text>
+      <Text style={styles.date}>{formatDate(date, 'PPP EEE p')}</Text>
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.body}>{truncate(body)}</Text>
     </Pressable>
