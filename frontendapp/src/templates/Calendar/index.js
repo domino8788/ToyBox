@@ -10,7 +10,6 @@ const Calendar = () => {
     acc[formattedDate] = { marked: true };
     return acc;
   }, {});
-  console.log(markedDates);
 
   return <CustomView.Calendar markedDates={markedDates} />;
 };
