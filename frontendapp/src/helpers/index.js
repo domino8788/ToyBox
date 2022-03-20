@@ -1,7 +1,7 @@
 import { format, formatDistanceToNow } from 'date-fns';
 import { ko } from 'date-fns/locale';
 
-export const formatDate = (date, formatString = 'yyyy-MM-dd') => {
+export const formatDate = (date, formatString = 'yyyy-MM-dd', option = { locale: ko }) => {
   const d = new Date(date);
   const now = Date.now();
   const diff = (now - d.getTime()) / 1000;
@@ -10,9 +10,9 @@ export const formatDate = (date, formatString = 'yyyy-MM-dd') => {
     return '방금 전';
   }
   if (diff < 60 * 60 * 24 * 3) {
-    return formatDistanceToNow(d, { addSuffix: true, locale: ko });
+    return formatDistanceToNow(d, { addSuffix: true, ...option });
   }
-  return format(d, formatString, { locale: ko });
+  return format(d, formatString, option);
 };
 
 export const truncate = (text) => {
