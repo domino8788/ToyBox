@@ -3,7 +3,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import Button from 'components/Button';
 
-const Write = ({ onSave, onDelete, isEditing }) => {
+const Write = ({ onSave, onDelete, isEditing, center }) => {
   const navigation = useNavigation();
   const onGoBack = () => {
     navigation.pop();
@@ -13,6 +13,7 @@ const Write = ({ onSave, onDelete, isEditing }) => {
       <View style={styles.iconButtonWrapper}>
         <Button.Transparent onPress={onGoBack} name="arrow-back" color="#424242" type="circle" />
       </View>
+      <View style={styles.center}>{center}</View>
       <View style={styles.buttons}>
         {isEditing && <Button.Transparent name="delete-forever" color="#ef5350" hasMarginRight type="circle" onPress={onDelete} />}
         <Button.Transparent name="check" color="#009688" type="circle" onPress={onSave} />
@@ -48,6 +49,17 @@ const styles = StyleSheet.create({
   },
   marginRight: {
     marginRight: 8,
+  },
+  center: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: -1,
+    flexDirection: 'row',
   },
 });
 
