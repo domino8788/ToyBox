@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useEffect } from 'react';
+import React, { createContext, useReducer, useEffect, useRef } from 'react';
 import produce from 'immer';
 import storage from 'storages';
 import { insertLog, updateLog, deleteLog } from './Log';
@@ -52,23 +52,31 @@ function reducer(state, action) {
       return handleAction(getAction[action.type]);
     }
     default: {
-      return state;
+      throw new Error('Unhandled action type');
     }
   }
 }
 
 export const ContextProvider = (props) => {
+  const initialStoreRef = useRef(null);
   const [store, _dispatch] = useReducer(reducer, initState);
   const dispatch = (type, payload) => _dispatch({ type, payload });
   useEffect(() => {
     storage
       .get()
-      .then((data) => dispatch(INIT, { data }))
+      .then((data) => {
+        if (data) {
+          initialStoreRef.current = data;
+          dispatch(INIT, { data });
+        }
+      })
       .catch(console.error);
   }, []);
 
   useEffect(() => {
-    storage.set(store).catch(console.error);
+    if (store !== initialStoreRef.current) {
+      storage.set(store).catch(console.error);
+    }
   }, [store]);
   return <Context.Provider value={[store, dispatch]}>{props.children}</Context.Provider>;
 };
