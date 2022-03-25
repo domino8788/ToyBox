@@ -28,6 +28,7 @@ const DrawerContainer = () => (
       <Drawer.Screen name="Home" component={Screen.Home} />
       <Drawer.Screen name="Todo" component={Screen.Todo} />
       <Drawer.Screen name="DayLog" component={Screen.DayLog} />
+      <Drawer.Screen name="PublicGallery" component={Screen.PublicGallery} />
     </Drawer.Navigator>
   </NavigationContainer>
 );
