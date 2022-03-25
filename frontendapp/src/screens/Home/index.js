@@ -14,6 +14,7 @@ const Home = (props) => {
       <View style={[styles.statusBarPlaceholder, { height: top }]} />
       <StatusBar backgroundColor={defaultColor} barStyle="light-content" />
       <Button title="Todo 열기" onPress={() => navigation.navigate('Todo')} />
+      <Button title="Day Log 열기" onPress={() => navigation.navigate('DayLog')} />
       <Button title="Public Gallery 열기" onPress={() => navigation.navigate('PublicGallery')} />
     </>
   );
