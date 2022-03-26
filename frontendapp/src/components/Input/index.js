@@ -1,3 +1,4 @@
 import Editor from './Editor';
+import Bordered from './Bordered';
 
-export default { Editor };
+export default { Editor, Bordered };
