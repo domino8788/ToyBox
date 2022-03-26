@@ -11,12 +11,12 @@ const Write = ({ onSave, onDelete, isEditing, center }) => {
   return (
     <View style={styles.block}>
       <View style={styles.iconButtonWrapper}>
-        <Button.Transparent onPress={onGoBack} name="arrow-back" color="#424242" type="circle" />
+        <Button.Transparent onPress={onGoBack} icon="arrow-back" iconColor="#424242" type="circle" />
       </View>
       <View style={styles.center}>{center}</View>
       <View style={styles.buttons}>
-        {isEditing && <Button.Transparent name="delete-forever" color="#ef5350" hasMarginRight type="circle" onPress={onDelete} />}
-        <Button.Transparent name="check" color="#009688" type="circle" onPress={onSave} />
+        {isEditing && <Button.Transparent icon="delete-forever" iconColor="#ef5350" hasMarginRight type="circle" onPress={onDelete} />}
+        <Button.Transparent icon="check" iconColor="#009688" type="circle" onPress={onSave} />
       </View>
     </View>
   );

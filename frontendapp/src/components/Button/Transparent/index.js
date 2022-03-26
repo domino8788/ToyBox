@@ -1,44 +1,75 @@
 import React from 'react';
-import { Platform, Pressable, StyleSheet, View } from 'react-native';
+import { Platform, Pressable, StyleSheet, View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const Transparent = ({ name, color, type, hasMarginRight, onPress }) => {
+const Transparent = ({ icon, color, iconColor, type, text, textColor, textSize, hasMarginRight, hasMarginBottom, onPress }) => {
   return (
-    <View style={[styles.iconButtonWrapper, hasMarginRight && styles.rightMargin, styleTypeMap[type]]}>
+    <View style={[hasMarginRight && styles.rightMargin, hasMarginBottom && styles.bottomMargin]}>
       <Pressable
-        style={({ pressed }) => [styles.iconButton, Platform.select({ ios: pressed && { backgroundColor: '#efefef' } })]}
+        style={({ pressed }) => [
+          { backgroundColor: color },
+          styles.defaultButtonWrapper,
+          styleTypeMap[type],
+          Platform.select({ ios: pressed && { backgroundColor: '#efefef' } }),
+        ]}
         onPress={onPress}
         android_ripple={{ color: '#ededed' }}
       >
-        <Icon name={name} size={24} color={color} />
+        {icon && <Icon name={icon} size={24} color={iconColor} />}
+        {text ? <Text style={[{ color: textColor, fontSize: textSize }, styles.text]}>{text}</Text> : null}
       </Pressable>
     </View>
   );
 };
 
+Transparent.defaultProps = {
+  icon: null,
+  color: '#00FF0000',
+  iconColor: 'black',
+  type: 'circle',
+  text: '',
+  textColor: 'black',
+  textSize: 14,
+  hasMarginRight: false,
+  hasMarginBottom: false,
+  onPress: () => {},
+};
+
 const styles = StyleSheet.create({
-  iconButtonWrapper: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    overflow: 'hidden',
-  },
-  iconButton: {
+  defaultButtonWrapper: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: 32,
-    height: 32,
+    overflow: 'hidden',
   },
   circleButton: {
+    width: 32,
+    height: 32,
     borderRadius: 16,
+  },
+  squareButton: {
+    width: 32,
+    height: 32,
+    borderRadius: 4,
+  },
+  rectangleButton: {
+    height: 48,
+    borderRadius: 4,
   },
   rightMargin: {
     marginRight: 8,
+  },
+  bottomMargin: {
+    marginBottom: 8,
+  },
+  text: {
+    fontWeight: 'bold',
   },
 });
 
 const styleTypeMap = {
   circle: styles.circleButton,
+  square: styles.squareButton,
+  rectangle: styles.rectangleButton,
 };
 
 export default Transparent;
