@@ -7,7 +7,7 @@ const Stack = createNativeStackNavigator();
 const PublicGallery = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="SignIn" component={Template.SignIn} options={{ headerShown: false }} />
+      <Stack.Screen name="SignIn" component={Template.SignIn} options={{ headerShown: false }} initialParams={{ title: 'Public Gallery' }} />
     </Stack.Navigator>
   );
 };
