@@ -11,8 +11,8 @@ const SignIn = ({ route }) => {
         <Input.Bordered hasMarginBottom placeholder="이메일" placeholderTextColor="darkgray" />
         <Input.Bordered placeholder="비밀번호" placeholderTextColor="darkgray" />
         <View style={styles.buttons}>
-          <Button.Transparent text="로그인" hasMarginBottom type="rectangle" color="#6200ee" textSize={14} textColor="white" />
-          <Button.Transparent text="회원가입" type="rectangle" color="#6200ee" textSize={14} textColor="white" />
+          <Button.Transparent text="로그인" hasMarginBottom type="rectangle" color="#6200ee" textSize={14} />
+          <Button.Transparent text="회원가입" type="rectangle" color="#6200ee" textSize={14} theme="secondary" />
         </View>
       </View>
     </SafeAreaView>

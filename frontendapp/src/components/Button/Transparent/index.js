@@ -2,21 +2,22 @@ import React from 'react';
 import { Platform, Pressable, StyleSheet, View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const Transparent = ({ icon, color, iconColor, type, text, textColor, textSize, hasMarginRight, hasMarginBottom, onPress }) => {
+const Transparent = ({ icon, color, iconColor, type, text, textSize, hasMarginRight, hasMarginBottom, onPress, theme }) => {
+  const isPrimary = theme === 'primary';
   return (
     <View style={[hasMarginRight && styles.rightMargin, hasMarginBottom && styles.bottomMargin]}>
       <Pressable
         style={({ pressed }) => [
-          { backgroundColor: color },
+          isPrimary && { backgroundColor: color },
           styles.defaultButtonWrapper,
           styleTypeMap[type],
-          Platform.select({ ios: pressed && { backgroundColor: '#efefef' } }),
+          Platform.select({ ios: pressed && { backgroundColor: color } }),
         ]}
         onPress={onPress}
-        android_ripple={{ color: '#ededed' }}
+        android_ripple={{ color: isPrimary ? '#ffffff' : color }}
       >
         {icon && <Icon name={icon} size={24} color={iconColor} />}
-        {text ? <Text style={[{ color: textColor, fontSize: textSize }, styles.text]}>{text}</Text> : null}
+        {text ? <Text style={[{ color: isPrimary ? 'white' : color, fontSize: textSize }, styles.text]}>{text}</Text> : null}
       </Pressable>
     </View>
   );
@@ -33,6 +34,7 @@ Transparent.defaultProps = {
   hasMarginRight: false,
   hasMarginBottom: false,
   onPress: () => {},
+  theme: 'primary',
 };
 
 const styles = StyleSheet.create({
