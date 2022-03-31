@@ -138,6 +138,7 @@ android {
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
+        resValue "string", "build_config_package", "com.learnreactnative"
     }
     splits {
         abi {
@@ -171,8 +172,43 @@ android {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
+        developmentdebug {
+            initWith debug
+            applicationIdSuffix ".dev"
+            matchingFallbacks = ['debug']
+        }
+        developmentrelease {
+            initWith release
+            applicationIdSuffix ".dev"
+            matchingFallbacks = ['release']
+        }
+        storybookdebug {
+            initWith debug
+            applicationIdSuffix ".storybook"
+            matchingFallbacks = ['debug']
+        }
+        storybookrelease {
+            initWith release
+            applicationIdSuffix ".storybook"
+            matchingFallbacks = ['release']
+        }
+        productiondebug {
+            initWith debug
+            applicationIdSuffix ".prod"
+            matchingFallbacks = ['debug']
+        }
+        productionrelease {
+            initWith release
+            applicationIdSuffix ".prod"
+            matchingFallbacks = ['release']
+        }
     }
-
+    flavorDimensions "default"
+    productFlavors {
+        development {}
+        storybook {}
+        production {}
+    }
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
@@ -227,8 +263,18 @@ task copyDownloadableDepsToLibs(type: Copy) {
     into 'libs'
 }
 
+project.ext.envConfigFiles  = [
+    productiondebug: ".env.production",
+    productionrelease: ".env.production",
+    developmentrelease: ".env.development",
+    developmentdebug: ".env.development",
+    storybookrelease: ".env.storybook",
+    storybookdebug: ".env.storybook"
+]
+
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle")
 apply from: file("../../node_modules/react-native-vector-icons/fonts.gradle")
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 applyNativeModulesAppBuildGradle(project)
 
 project.ext.vectoricons = [
