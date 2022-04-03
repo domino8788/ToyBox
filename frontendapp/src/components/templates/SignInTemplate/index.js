@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
   },
   fullScreen: {
     flex: 1,
+    backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
   },
