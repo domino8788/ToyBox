@@ -42,7 +42,7 @@ const DayLogTab = () => {
   );
 };
 
-const DayLogPage = () => {
+const DayLogScreen = () => {
   return (
     <Stack.Navigator initialRouteName="DayLogTab">
       <Stack.Screen name="DayLogTab" component={DayLogTab} options={{ headerShown: false }} />
@@ -51,4 +51,4 @@ const DayLogPage = () => {
   );
 };
 
-export default DayLogPage;
+export default DayLogScreen;

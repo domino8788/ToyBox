@@ -5,7 +5,7 @@ import SignInTemplate from 'components/templates/SignInTemplate';
 
 const Stack = createNativeStackNavigator();
 
-const PublicGalleryPage = () => {
+const PublicGalleryScreen = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="SignIn" component={SignInTemplate} options={{ headerShown: false }} initialParams={{ title: 'Public Gallery' }} />
@@ -13,4 +13,4 @@ const PublicGalleryPage = () => {
   );
 };
 
-export default PublicGalleryPage;
+export default PublicGalleryScreen;

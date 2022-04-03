@@ -5,7 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const defaultColor = '#26a69a';
 
-const HomePage = (props) => {
+const HomeScreen = (props) => {
   const styles = useStyles(makeStyles({ backgroundColor: defaultColor }), []);
   const { top } = useSafeAreaInsets();
   const { navigation } = props;
@@ -26,4 +26,4 @@ const makeStyles = (props) => ({
   },
 });
 
-export default HomePage;
+export default HomeScreen;

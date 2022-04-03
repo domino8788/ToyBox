@@ -5,10 +5,10 @@ import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { ContextProvider } from 'stores/Context';
 
-import HomePage from 'components/pages/HomePage';
-import TodoPage from 'components/pages/TodoPage';
-import DayLogPage from 'components/pages/DayLogPage';
-import PublicGalleryPage from 'components/pages/PublicGalleryPage';
+import HomeScreen from 'components/screens/HomeScreen';
+import TodoScren from 'components/screens/TodoScreen';
+import DayLogScreen from 'components/screens/DayLogScreen';
+import PublicGalleryScreen from 'components/screens/PublicGalleryScreen';
 
 LogBox.ignoreLogs(["[react-native-gesture-handler] Seems like you're using an old API with gesture components, check out new Gestures system!"]);
 
@@ -29,10 +29,10 @@ const AppContainer = (props) => (
 const DrawerContainer = () => (
   <NavigationContainer>
     <Drawer.Navigator initialRouteName="Home" drawerPosition="left" backBehavior="history">
-      <Drawer.Screen name="Home" component={HomePage} />
-      <Drawer.Screen name="Todo" component={TodoPage} />
-      <Drawer.Screen name="DayLog" component={DayLogPage} />
-      <Drawer.Screen name="PublicGallery" component={PublicGalleryPage} />
+      <Drawer.Screen name="Home" component={HomeScreen} />
+      <Drawer.Screen name="Todo" component={TodoScren} />
+      <Drawer.Screen name="DayLog" component={DayLogScreen} />
+      <Drawer.Screen name="PublicGallery" component={PublicGalleryScreen} />
     </Drawer.Navigator>
   </NavigationContainer>
 );
