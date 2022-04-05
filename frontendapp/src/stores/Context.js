@@ -3,9 +3,17 @@ import produce from 'immer';
 import storage from 'storages';
 import { insertLog, updateLog, deleteLog } from './Log';
 import { insertTodo, toggleTodo, deleteTodo } from './Todo';
+import { handleCommon } from './Common';
 
 const Context = createContext();
-const initState = { logs: [], todos: [], keyword: '' };
+const initState = {
+  logs: [],
+  todos: [],
+  keyword: '',
+  common: {
+    isLoading: false,
+  },
+};
 const init = ({ data }) =>
   produce((draft) => {
     Object.entries(initState).forEach(([key, initValue]) => (draft[key] = data[key] || initValue));
@@ -24,6 +32,7 @@ export const INSERT_TODO = 'INSERT_TODO';
 export const TOGGLE_TODO = 'TOGGLE_TODO';
 export const DELETE_TODO = 'DELETE_TODO';
 export const SEARCH_KEYWORD = 'SEARCH_KEYWORD';
+export const HANDLE_COMMON = 'HANDLE_COMMON';
 
 const getAction = {
   INIT: init,
@@ -34,6 +43,7 @@ const getAction = {
   TOGGLE_TODO: toggleTodo,
   DELETE_TODO: deleteTodo,
   SEARCH_KEYWORD: searchKeyword,
+  HANDLE_COMMON: handleCommon,
 };
 const makeAction = (payload, state) => (action) => action(payload)(state);
 
@@ -48,7 +58,8 @@ function reducer(state, action) {
     case INSERT_LOG:
     case UPDATE_LOG:
     case DELETE_LOG:
-    case SEARCH_KEYWORD: {
+    case SEARCH_KEYWORD:
+    case HANDLE_COMMON: {
       return handleAction(getAction[action.type]);
     }
     default: {
@@ -66,6 +77,7 @@ export const ContextProvider = (props) => {
       .get()
       .then((data) => {
         if (data) {
+          data.common = initState.common;
           initialStoreRef.current = data;
           dispatch(INIT, { data });
         }
